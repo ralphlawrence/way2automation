@@ -1,5 +1,3 @@
-/// <reference types="cypress" />
-
 describe('Way2Automation Demo Site', () => {
   beforeEach(() => {
     cy.visit('/')
@@ -12,8 +10,5 @@ describe('Way2Automation Demo Site', () => {
 
   it('Navigate to the web page', () => {
     cy.contains('Test your Selenium / QTP Scripts').should('be.visible')
-    
   });
-
-
 });

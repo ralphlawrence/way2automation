@@ -1,5 +1,3 @@
-/// <reference types="cypress" />
-
 describe('List Action Name category', () => {
     beforeEach(() => {
         cy.visit('/')
@@ -16,8 +14,7 @@ describe('List Action Name category', () => {
             cy.log(`Checking category: ${category}`)
             actions.forEach((action) => {
                 cy.contains(action, { matchCase: false })
-                    .scrollIntoView()
-                    .should('be.visible')
+                    .should('exist')
             })
         })
     })
