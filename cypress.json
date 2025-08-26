@@ -1,0 +1,11 @@
+{
+  "baseUrl": "https://www.way2automation.com/demo.html#",
+  "viewportWidth": 1280,
+  "viewportHeight": 720,
+  "defaultCommandTimeout": 8000,
+  "pageLoadTimeout": 60000,
+  "video": false,
+  "screenshotsFolder": "cypress/screenshots",
+  "videosFolder": "cypress/videos",
+  "testFiles": "**/*.spec.js"
+}
