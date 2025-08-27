@@ -1,5 +1,5 @@
 {
-
+  "baseUrl": "https://www.way2automation.com",
   "viewportWidth": 1280,
   "viewportHeight": 720,
   "defaultCommandTimeout": 8000,
