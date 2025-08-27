@@ -1,7 +1,5 @@
-
-
-/*Dynamic Elements */
-export const dynamicElements = {
+/*Dynamic Components */
+export const dynamicComponents = {
     submitBtn: () =>
         cy.contains('a', 'Submit Button Clicked'),
     dropDown: () =>
