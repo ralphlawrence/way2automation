@@ -1,14 +1,10 @@
-describe('Way2Automation Demo Site', () => {
-  beforeEach(() => {
-    cy.visit('/')
-    Cypress.on('uncaught:exception', (err) => {
-      if (err.message.includes('jQuery is not defined')) {
-        return false
-      }
-    })
-  });
+import { jQueryBypass } from "../support/methods/common";
 
+describe('Way2Automation Demo Site', () => {
   it('Navigate to the web page', () => {
+    cy.fixture('actionNames').as('actionNames')
+    cy.visit('/demo.html')
+    jQueryBypass()
     cy.contains('Test your Selenium / QTP Scripts').should('be.visible')
   });
 });

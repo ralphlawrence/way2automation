@@ -1,15 +1,13 @@
+import { jQueryBypass } from "../support/methods/common";
+
 describe('List Action Name category', () => {
     beforeEach(() => {
-        cy.visit('/')
-        Cypress.on('uncaught:exception', (err) => {
-            if (err.message.includes('jQuery is not defined')) {
-                return false
-            }
-        })
+        cy.visit('/demo.html')
+        jQueryBypass()
         cy.fixture('actionNames').as('actionNames')
     });
 
-    it('should validate presence of each action button', function () {
+    it('should validate presence of each action name', function () {
         Object.entries(this.actionNames).forEach(([category, actions]) => {
             cy.log(`Checking category: ${category}`)
             actions.forEach((action) => {
