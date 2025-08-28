@@ -1,9 +1,16 @@
-import { visitDemoHtml } from "../support/methods/common";
+import { visitDemoHtml, visitSelenium } from "../support/methods/common";
+import { clickUntilVisible, clickGetStarted } from "../support/methods/Slider";
 import { getnada } from "../support/pages/InboxPage";
 import { dynamicComponents } from "../support/pages/LandingPage";
+import { LifetimeMember } from "../support/pages/lifetimeMembership";
 import { RegistrationPage } from "../support/pages/RegistrationPage";
+import { searchCourse, verifyUrl, clickStartButton, selectPayment } from "../support/methods/selenium";
+import { Selenium, Cucumber } from "../support/pages/SeleniumPage";
 
 describe('Retrieve and Visit URL, Fill out Registration Form and Click [EXPLORE LIFETIME MEMBERSHIP LINK]', () => {
+    beforeEach(() => {
+        cy.fixture('url').as('url');
+    });
 
     it('should click the [EXPLORE LIFETIME MEMBERSHIP LINK]', () => {
         visitDemoHtml();
@@ -16,8 +23,7 @@ describe('Retrieve and Visit URL, Fill out Registration Form and Click [EXPLORE 
                 cy.log('Target URL:', targetUrl);
 
                 /** Visit the target URL */
-                cy.origin(targetUrl, () => {
-                    cy.visit('/');
+                cy.visit(targetUrl, () => {
                     cy.get('#load_box').should('be.visible');
 
                     /**Click the [EXPLORE LIFETIME MEMBERSHIP LINK] event */
@@ -62,18 +68,57 @@ describe('Retrieve and Visit URL, Fill out Registration Form and Click [EXPLORE 
             });
     });
 
-    it.only('should be able to scroll into "30+ Courses video library FREE ACCESS"', () => {
+    it('should be able to scroll into "30+ Courses video library FREE ACCESS"', () => {
         RegistrationPage.visit();
-
-        cy.contains('a.fancybox', 'EXPLORE LIFETIME MEMBERSHIP')
+        RegistrationPage.lifetimeMemberBtn()
             .then(($a) => {
                 const newUrl = $a.prop('href');
-                cy.origin(new URL(newUrl).origin, { args: { newUrl } }, ({ newUrl }) => {
-                    cy.visit(newUrl); // go straight to the link's page
-                    cy.get('h2', { timeout: 10000 })
-                        .contains('30+ Courses video library FREE ACCESS')
-                        .scrollIntoView();
-                });
+                cy.visit(newUrl); // Direct visit, no cy.origin needed
+
+                cy.get('h2', { timeout: 10000 })
+                    .contains('30+ Courses video library FREE ACCESS')
+                    .scrollIntoView()
+                    .should('be.visible');
             });
+
+        LifetimeMember.slider().should('be.visible');
+        /**Navigate to "Automation Architect Selenium with 7 live projects" */
+        clickUntilVisible("Automation Architect Selenium with 7 live projects");
+
+        /**Click on the [Get Started] button */
+        clickGetStarted();
+
+        /** Verify that the URL page is equal to 
+        "https://www.seleniumtutorial.com/p/automation-architect-in-selenium-7-live-projects".*/
+        cy.fixture('url').then((url) => {
+            verifyUrl(url.seleniumTutorial);
+        });
+
+
     });
+
+    it.only('should be able to visit selenium automation course', () => {
+        visitSelenium();
+
+        /**Find the course "CucumberParallelWithPageObjects - Project Code", then click 'Start' button */
+        Selenium.course().should('exist');
+        cy.fixture('selenium').then((data) => {
+            const cucumberCourse = data.course[0].cucumber;
+            cy.log(`Looking for course: ${cucumberCourse}`);
+
+            searchCourse(cucumberCourse).then((location) => {
+                clickStartButton(cucumberCourse, location);
+            });
+
+            /** Wait for page to Load. Asserting the lecture heading to make sure it loads the right page */
+            Cucumber.lectureHeading(cucumberCourse).should('be.visible');
+        });
+
+        /**Navigate back to Selenium Tutorial site*/
+        visitSelenium();
+
+        /** Select Payment Method and assert the payment amount*/
+        selectPayment('USD');
+    });
+
 });

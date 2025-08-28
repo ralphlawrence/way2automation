@@ -24,13 +24,10 @@ export const RegistrationPage = {
     password: (data) => {
         cy.get('input[name="password"]').eq(1).type(data.password);
     },
-    fillForm: (tempEmail, data) => {
-        RegistrationPage.name(data);
-        RegistrationPage.phone(data);
-        RegistrationPage.email(tempEmail);
-        RegistrationPage.country(data);
-        RegistrationPage.city(data);
-        RegistrationPage.username(data);
-        RegistrationPage.password(data);
+    submit: () => {
+        cy.get('input[type="submit"]').click();
+    },
+    lifetimeMemberBtn: () => {
+        return cy.contains('a.fancybox', 'EXPLORE LIFETIME MEMBERSHIP')
     }
 };

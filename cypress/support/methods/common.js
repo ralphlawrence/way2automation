@@ -10,3 +10,15 @@ export const jQueryBypass = () => {
         }
     })
 };
+
+export const visitSelenium = () => {
+    cy.fixture('url').then((data) => {
+        cy.visit(data.seleniumTutorial);
+    });
+};
+
+export const visitGetnada = () => {
+    cy.fixture('url').then((data) => {
+        cy.visit(data.getnada);
+    });
+};
