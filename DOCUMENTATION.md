@@ -22,8 +22,9 @@ automated testing.
 
 ------------------------------------------------------------------------
 
-## 3. Project Structure
+## Project Structure
 
+```plaintext
 cypress/
  ├── e2e/
  │   └── way2Automation.spec.js     # Demo site automation
@@ -42,7 +43,8 @@ cypress/
  │   ├── pages/                     # Page Object files
  │   ├── methods/                   # Helper reusable methods
  │   └── commands.js                # Custom Cypress commands
- 
+
+ ```
 ------------------------------------------------------------------------
 
 ## 4. Implemented Test Scenarios
