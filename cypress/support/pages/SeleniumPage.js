@@ -13,5 +13,6 @@ export const payment = {
     payinUSDBtn: () => cy.contains('label.btn', 'PAY IN USD'),
     payinIndianCurrencyBtn: () => cy.contains('label.btn', 'PAY IN INDIAN CURRENCY'),
     price_USD: () => cy.get('.default-product-price.product_4632690'),
-    price_IndianCurrency: () => cy.get('.default-product-price.product_4632691')
+    price_IndianCurrency: () => cy.get('.default-product-price.product_4632691'),
+    enrollBtn: () => cy.get('#enroll-button')
 };

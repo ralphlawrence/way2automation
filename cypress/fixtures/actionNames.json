@@ -1,31 +1,31 @@
 {
-    "interaction": [
-        "draggable",
-        "droppable",
-        "resizable",
-        "selectable",
-        "sortable"
-    ],
-    "widget": [
-        "accordion",
-        "autocomplete",
-        "datepicker",
-        "menu",
-        "slider",
-        "tabs",
-        "tooltip"
-    ],
-    "framesAndWindows": [
-        "frames and windows"
-    ],
-    "dynamicElement": [
-        "submit button clicked",
-        "dropdown"
-    ],
-    "registration": [
-        "registration"
-    ],
-    "alert": [
-        "alert"
-    ]
+  "interaction": [
+    "draggable",
+    "droppable",
+    "resizable",
+    "selectable",
+    "sortable"
+  ],
+  "widget": [
+    "accordion",
+    "autocomplete",
+    "datepicker",
+    "menu",
+    "slider",
+    "tabs",
+    "tooltip"
+  ],
+  "frames and windows": [
+    "frames and windows"
+  ],
+  "dynamic elements": [
+    "submit button clicked",
+    "dropdown"
+  ],
+  "registration": [
+    "registration"
+  ],
+  "alert": [
+    "alert"
+  ]
 }

@@ -11,14 +11,15 @@ export const jQueryBypass = () => {
     })
 };
 
-export const visitSelenium = () => {
+const visitPage = (pageKey) => {
     cy.fixture('url').then((data) => {
-        cy.visit(data.seleniumTutorial);
+        if (!data[pageKey]) {
+            throw new Error(`Page key "${pageKey}" not found in url.json`);
+        }
+        cy.visit(data[pageKey]);
     });
 };
 
-export const visitGetnada = () => {
-    cy.fixture('url').then((data) => {
-        cy.visit(data.getnada);
-    });
-};
+export const visitSelenium = () => visitPage('seleniumTutorial');
+export const visitGetnada = () => visitPage('getnada');
+export const visitRegistration = () => visitPage('registration');

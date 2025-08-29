@@ -1,9 +1,5 @@
 import { Selenium, payment } from "../pages/SeleniumPage";
 
-export const verifyUrl = (expectedUrl) => {
-    cy.url().should('eq', expectedUrl);
-};
-
 export const searchCourse = (courseName, maxTries = 10) => {
     let tries = 0;
 
@@ -48,13 +44,26 @@ export const clickStartButton = (courseName, location) => {
 };
 
 export const selectPayment = (currency) => {
-    if (currency === 'USD') {
-        payment.payinUSDBtn().click();
-        payment.price_USD().should('have.text', '$29');
-    } else if (currency === 'INR') {
-        payment.payinIndianCurrencyBtn().click();
-        payment.price_IndianCurrency().should('have.text', '₹1,999');
-    } else {
-        throw new Error(`Unsupported currency: ${currency}`);
-    }
+    cy.fixture('selenium').then((data) => {
+        const prices = data.prices;
+        if (currency === 'USD') {
+            payment.payinUSDBtn().click();
+            payment.price_USD().should('have.text', prices.USD);
+        } else if (currency === 'INR') {
+            payment.payinIndianCurrencyBtn().click();
+            payment.price_IndianCurrency().should('have.text', prices.INR);
+        } else {
+            throw new Error(`Unsupported currency: ${currency}`);
+        }
+    });
+};
+
+export const clickEnrollButton = () => {
+    cy.fixture('selenium').then((data) => {
+        const { enroll } = data;
+
+        payment.enrollBtn().invoke('text').should('include', enroll.beforeClick);
+        cy.clickVisibleElement(payment.enrollBtn);
+        payment.enrollBtn().invoke('text').should('include', enroll.afterClick);
+    });
 };

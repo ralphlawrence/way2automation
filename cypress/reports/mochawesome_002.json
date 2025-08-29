@@ -5,9 +5,9 @@
     "passes": 8,
     "pending": 0,
     "failures": 1,
-    "start": "2025-08-29T19:41:08.784Z",
-    "end": "2025-08-29T19:42:45.910Z",
-    "duration": 97126,
+    "start": "2025-08-29T19:48:28.125Z",
+    "end": "2025-08-29T19:50:19.249Z",
+    "duration": 111124,
     "testsRegistered": 9,
     "passPercent": 88.88888888888889,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "dd53a851-2610-47bd-a135-c286e222ad8c",
+      "uuid": "02712fc4-f94d-4444-8639-8f127364e81d",
       "title": "",
       "fullFile": "cypress\\e2e\\way2Automation.spec.js",
       "file": "cypress\\e2e\\way2Automation.spec.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "b8166bef-c0f1-44b0-9854-0f42a8f2fe99",
+          "uuid": "55667080-c2b1-4473-b33a-a78ec4a0b538",
           "title": "Way2Automation Demo Site Testing",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "Should navigate to the way2automation demo web page",
               "fullTitle": "Way2Automation Demo Site Testing Should navigate to the way2automation demo web page",
               "timedOut": null,
-              "duration": 8424,
+              "duration": 8546,
               "state": "passed",
               "speed": "medium",
               "pass": true,
@@ -47,8 +47,8 @@
               "context": null,
               "code": "cy.contains('Test your Selenium / QTP Scripts').should('be.visible');",
               "err": {},
-              "uuid": "18b52794-ea13-4b65-8004-a2652b5021bc",
-              "parentUUID": "b8166bef-c0f1-44b0-9854-0f42a8f2fe99",
+              "uuid": "8cd8d464-a57b-466d-82fa-eb2de02b9e41",
+              "parentUUID": "55667080-c2b1-4473-b33a-a78ec4a0b538",
               "isHook": false,
               "skipped": false
             },
@@ -56,7 +56,7 @@
               "title": "Should extract and list action names by category",
               "fullTitle": "Way2Automation Demo Site Testing Should extract and list action names by category",
               "timedOut": null,
-              "duration": 1036,
+              "duration": 989,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -65,8 +65,8 @@
               "context": null,
               "code": "const categories = {};\n(0, _LandingPage.actionCategories)().each($section => {\n  const categoryName = $section.find('h1').text().trim().toLowerCase();\n  const actions = [];\n  cy.wrap($section).find('ul li a').each($action => {\n    actions.push($action.text().trim().toLowerCase());\n  }).then(() => {\n    categories[categoryName] = actions;\n  });\n}).then(() => {\n  // Save to cypress/fixtures/actionNames.json\n  cy.writeFile('cypress/fixtures/actionNames.json', categories, {\n    flag: 'w'\n  }); // Log of categories\n  cy.log(JSON.stringify(categories, null, 2));\n});",
               "err": {},
-              "uuid": "2f494ad5-74ec-40e0-992d-56353d52c1ad",
-              "parentUUID": "b8166bef-c0f1-44b0-9854-0f42a8f2fe99",
+              "uuid": "2d0161e8-9f70-4170-9761-5007cdf6ffa3",
+              "parentUUID": "55667080-c2b1-4473-b33a-a78ec4a0b538",
               "isHook": false,
               "skipped": false
             },
@@ -74,7 +74,7 @@
               "title": "Should retrieve target URL for [Submit Button Clicked]",
               "fullTitle": "Way2Automation Demo Site Testing Should retrieve target URL for [Submit Button Clicked]",
               "timedOut": null,
-              "duration": 11413,
+              "duration": 11524,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -83,28 +83,28 @@
               "context": null,
               "code": "_LandingPage.dynamicComponents.submitBtn().should('exist').should('have.attr', 'href').then(href => {\n  const targetUrl = href; // URL retrieved in [Submit Button Clicked] event within \"Dynamic Elements\" category\n  cy.log('Target URL:', targetUrl); // Visit the target URL\n  cy.visit(targetUrl, () => {\n    cy.assertBtnVisibility(_LifetimeMembership.LifetimeMember.regiForm); // Click the [EXPLORE LIFETIME MEMBERSHIP LINK] event\n    cy.clickVisibleElement(_LifetimeMembership.LifetimeMember.exploreBtn);\n  });\n});",
               "err": {},
-              "uuid": "bbecbf03-c673-4f65-bab6-fb148e1b5bdc",
-              "parentUUID": "b8166bef-c0f1-44b0-9854-0f42a8f2fe99",
+              "uuid": "02f02691-8e21-4577-b366-bd45a30f8b7f",
+              "parentUUID": "55667080-c2b1-4473-b33a-a78ec4a0b538",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "18b52794-ea13-4b65-8004-a2652b5021bc",
-            "2f494ad5-74ec-40e0-992d-56353d52c1ad",
-            "bbecbf03-c673-4f65-bab6-fb148e1b5bdc"
+            "8cd8d464-a57b-466d-82fa-eb2de02b9e41",
+            "2d0161e8-9f70-4170-9761-5007cdf6ffa3",
+            "02f02691-8e21-4577-b366-bd45a30f8b7f"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 20873,
+          "duration": 21059,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
         },
         {
-          "uuid": "6523d41b-ea22-4c72-bb76-e26ec923530c",
+          "uuid": "c8dcd8bb-1d53-434a-9656-17e4c154f89d",
           "title": "Lifetime Membership Registration",
           "fullFile": "",
           "file": "",
@@ -115,7 +115,7 @@
               "title": "Should fill out the registration form by using an email from getnada.com",
               "fullTitle": "Lifetime Membership Registration Should fill out the registration form by using an email from getnada.com",
               "timedOut": null,
-              "duration": 21273,
+              "duration": 20875,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -124,26 +124,26 @@
               "context": null,
               "code": "(0, _common.visitGetnada)();\ncy.forceClickVisibleBtn(_InboxPage.getnada.getInboxBtn);\ncy.clickVisibleElement(_InboxPage.getnada.getChooseForMeBtn);\ncy.wait(4000);\ncy.assertBtnVisibility(_InboxPage.getnada.getTempEmail);\n_InboxPage.getnada.getTempEmail().invoke('text').then(emailText => {\n  const tempEmail = emailText.trim();\n  cy.log(`Used Getnada email: ${tempEmail}`);\n  cy.fixture('registrationTestData').then(data => {\n    cy.visit('/way2auto_jquery/index.php');\n    cy.clickVisibleElement(_RegistrationPage.RegistrationPage.regiForm);\n    (0, _registrationForm.fillRegiForm)(data, tempEmail);\n  });\n});",
               "err": {},
-              "uuid": "62271a04-5ca9-4aee-bd39-e9377954f45f",
-              "parentUUID": "6523d41b-ea22-4c72-bb76-e26ec923530c",
+              "uuid": "4aaafa74-477a-415f-9309-582996e92f67",
+              "parentUUID": "c8dcd8bb-1d53-434a-9656-17e4c154f89d",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "62271a04-5ca9-4aee-bd39-e9377954f45f"
+            "4aaafa74-477a-415f-9309-582996e92f67"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 21273,
+          "duration": 20875,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
         },
         {
-          "uuid": "d885b241-c8f8-40e4-8867-e849bdbd943a",
+          "uuid": "c0d972b5-8288-4405-915a-40969938cf15",
           "title": "Lifetime Membership Course Flow",
           "fullFile": "",
           "file": "",
@@ -154,7 +154,7 @@
               "title": "Should display \"30+ Courses video library FREE ACCESS\"",
               "fullTitle": "Lifetime Membership Course Flow Should display \"30+ Courses video library FREE ACCESS\"",
               "timedOut": null,
-              "duration": 4857,
+              "duration": 4891,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -163,8 +163,8 @@
               "context": null,
               "code": "cy.get('h2', {\n  timeout: 10000\n}).contains('30+ Courses video library FREE ACCESS').scrollIntoView().should('be.visible');\n_LifetimeMembership.LifetimeMember.slider().should('be.visible');",
               "err": {},
-              "uuid": "1db8206a-8165-4dc4-8045-e4802065997f",
-              "parentUUID": "d885b241-c8f8-40e4-8867-e849bdbd943a",
+              "uuid": "d8389c92-30a6-4b51-a2e3-1b800cec4968",
+              "parentUUID": "c0d972b5-8288-4405-915a-40969938cf15",
               "isHook": false,
               "skipped": false
             },
@@ -172,7 +172,7 @@
               "title": "Should navigate to Automation Architect course",
               "fullTitle": "Lifetime Membership Course Flow Should navigate to Automation Architect course",
               "timedOut": null,
-              "duration": 23935,
+              "duration": 24352,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -181,27 +181,27 @@
               "context": null,
               "code": "(0, _Slider.clickUntilVisible)(\"Automation Architect Selenium with 7 live projects\"); // Click Get started [button]\n(0, _Slider.clickGetStarted)(); // Verify URL\ncy.fixture('url').then(url => {\n  cy.verifyUrl(url.seleniumTutorial);\n});",
               "err": {},
-              "uuid": "5c8292b0-e345-4711-80a1-7e3a71dcc7c7",
-              "parentUUID": "d885b241-c8f8-40e4-8867-e849bdbd943a",
+              "uuid": "8ffcd667-08e8-4b85-a40e-4bcfba0d5b94",
+              "parentUUID": "c0d972b5-8288-4405-915a-40969938cf15",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "1db8206a-8165-4dc4-8045-e4802065997f",
-            "5c8292b0-e345-4711-80a1-7e3a71dcc7c7"
+            "d8389c92-30a6-4b51-a2e3-1b800cec4968",
+            "8ffcd667-08e8-4b85-a40e-4bcfba0d5b94"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 28792,
+          "duration": 29243,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
         },
         {
-          "uuid": "64904084-4e56-4122-9d34-b4e786a7d94e",
+          "uuid": "814d5286-3de1-4bd4-96d6-78bc42f6727a",
           "title": "Automation Architecture Selenium page test flow",
           "fullFile": "",
           "file": "",
@@ -212,7 +212,7 @@
               "title": "Should find the course \"CucumberParallelWithPageObjects - Project Code\" and click [Start]",
               "fullTitle": "Automation Architecture Selenium page test flow Should find the course \"CucumberParallelWithPageObjects - Project Code\" and click [Start]",
               "timedOut": null,
-              "duration": 721,
+              "duration": 954,
               "state": "failed",
               "speed": null,
               "pass": false,
@@ -225,8 +225,8 @@
                 "estack": "TypeError: Cannot read properties of undefined (reading 'seleniumTutorial')\n    at Context.eval (webpack:///./cypress/support/methods/common.js:16:18)",
                 "diff": null
               },
-              "uuid": "5210a9a2-061b-468a-8538-fb4c35ad84f2",
-              "parentUUID": "64904084-4e56-4122-9d34-b4e786a7d94e",
+              "uuid": "0ef568c9-ed05-42f6-85fe-60df60c0730b",
+              "parentUUID": "814d5286-3de1-4bd4-96d6-78bc42f6727a",
               "isHook": false,
               "skipped": false
             },
@@ -234,17 +234,17 @@
               "title": "Should allow payment selection",
               "fullTitle": "Automation Architecture Selenium page test flow Should allow payment selection",
               "timedOut": null,
-              "duration": 4932,
+              "duration": 5351,
               "state": "passed",
-              "speed": "fast",
+              "speed": "medium",
               "pass": true,
               "fail": false,
               "pending": false,
               "context": null,
               "code": "(0, _selenium.selectPayment)('USD');",
               "err": {},
-              "uuid": "ece26504-0b53-4672-82a8-bdd5f1d569d3",
-              "parentUUID": "64904084-4e56-4122-9d34-b4e786a7d94e",
+              "uuid": "0fedf8dc-50f3-4cd6-ac30-b300dc953c11",
+              "parentUUID": "814d5286-3de1-4bd4-96d6-78bc42f6727a",
               "isHook": false,
               "skipped": false
             },
@@ -252,7 +252,7 @@
               "title": "Should enroll in the course",
               "fullTitle": "Automation Architecture Selenium page test flow Should enroll in the course",
               "timedOut": null,
-              "duration": 1689,
+              "duration": 3278,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -261,23 +261,23 @@
               "context": null,
               "code": "(0, _selenium.clickEnrollButton)();",
               "err": {},
-              "uuid": "ed140f6e-b993-4ab6-a3e1-10735c77e87c",
-              "parentUUID": "64904084-4e56-4122-9d34-b4e786a7d94e",
+              "uuid": "bd835d8d-ce6f-45ce-91c1-2184f8233f9e",
+              "parentUUID": "814d5286-3de1-4bd4-96d6-78bc42f6727a",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "ece26504-0b53-4672-82a8-bdd5f1d569d3",
-            "ed140f6e-b993-4ab6-a3e1-10735c77e87c"
+            "0fedf8dc-50f3-4cd6-ac30-b300dc953c11",
+            "bd835d8d-ce6f-45ce-91c1-2184f8233f9e"
           ],
           "failures": [
-            "5210a9a2-061b-468a-8538-fb4c35ad84f2"
+            "0ef568c9-ed05-42f6-85fe-60df60c0730b"
           ],
           "pending": [],
           "skipped": [],
-          "duration": 7342,
+          "duration": 9583,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000

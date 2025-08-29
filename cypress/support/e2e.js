@@ -16,5 +16,12 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 
+// Cannot read properties of null (reading 'postMessage')
+Cypress.on('uncaught:exception', (err, runnable) => {
+  if (err.message.includes('postMessage')) {
+    return false;
+  }
+});
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

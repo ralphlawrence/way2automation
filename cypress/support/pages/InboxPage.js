@@ -1,22 +1,11 @@
 export const getnada = {
-    visit: () => {
-        cy.visit('https://inboxes.com/');
-    },
     getInboxBtn: () => {
-        return cy.contains('Get my first inbox!');
+        return cy.contains('.flex-row > .font-medium', 'Get my first inbox!');
     },
     getChooseForMeBtn: () => {
-        return cy.contains('Choose for me');
+        return cy.contains('.flex-wrap > :nth-child(2) > .text-center', 'Choose for me');
     },
-    createInbox: () => {
-        getInboxPage.getInboxBtn().click();
-        getInboxPage.getChooseForMeBtn().click();
-    },
-    getEmail: () => {
-        return cy.get('.text-2xl > .text-indigo-600');
-    },  
     getTempEmail: () => {
-        return cy.get('.text-2xl > .text-indigo-600')
-            
+        return cy.get('.text-2xl > .text-indigo-600');
     }
 }

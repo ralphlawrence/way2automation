@@ -1,4 +1,4 @@
-import { LifetimeMember } from "../pages/lifetimeMembership";
+import { LifetimeMember } from "../pages/LifetimeMembership";
 
 export const clickUntilVisible = (text, maxTries = 30) => {
     LifetimeMember.nextBtn().click();
@@ -25,5 +25,6 @@ export const clickUntilVisible = (text, maxTries = 30) => {
 export const clickGetStarted = () => {
     LifetimeMember.activeSlide()
         .contains('Get Started')
+        .should('be.visible')
         .click();
 };

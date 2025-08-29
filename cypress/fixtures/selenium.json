@@ -3,5 +3,13 @@
         {
             "cucumber": "CucumberParallelWithPageObjects - Project Code"
         }
-    ]
+    ],
+    "enroll": {
+        "beforeClick": "Enroll in Course",
+        "afterClick": "Processing..."
+    },
+    "prices": {
+        "USD": "$29",
+        "INR": "₹1,999"
+    }
 }
