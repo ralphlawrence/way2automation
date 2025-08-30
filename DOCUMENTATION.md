@@ -14,7 +14,7 @@ automated testing.
 
 ## 2. Tools & Framework
 
--   **Cypress v11** -- test automation framework (updated from Cypress 9* to Cypress v11** with the knowledge of the talent acquisition) 
+- **Cypress v11** – Test automation framework (original requirement was Cypress v9, but after confirming with the Talent Acquisition contact, Cypress v11 was allowed due to limitations in v9)
 -   **Mocha** -- test runner
 -   **Node.js v16.14**
 -   **Custom Commands** -- reusable helper functions
