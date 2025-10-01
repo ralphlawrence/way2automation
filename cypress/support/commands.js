@@ -23,26 +23,3 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-Cypress.Commands.add('typeVisible', (elementFn, text) => {
-    elementFn().should('be.visible').type(text);
-});
-
-Cypress.Commands.add('selectVisibleOption', (elementFn, optionText) => {
-    elementFn().should('be.visible').select(optionText);
-});
-
-Cypress.Commands.add('forceClickVisibleBtn', (elementFn) => {
-    elementFn().should('be.visible').click({ force: true });
-});
-
-Cypress.Commands.add('clickVisibleElement', (elementFn) => {
-    elementFn().should('be.visible').click({});
-});
-
-Cypress.Commands.add('assertBtnVisibility', (elementFn) => {
-    elementFn().should('be.visible');
-});
-
-Cypress.Commands.add('verifyUrl', (expectedUrl) => {
-    cy.url().should('eq', expectedUrl);
-});

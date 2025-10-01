@@ -1,11 +1,11 @@
 import { RegistrationPage } from "../pages/RegistrationPage";
 
 export const fillRegiForm = (data, tempEmail) => {
-    cy.typeVisible(RegistrationPage.name, data.name);
-    cy.typeVisible(RegistrationPage.phone, data.phone);
-    cy.typeVisible(RegistrationPage.email, tempEmail);
-    cy.selectVisibleOption(RegistrationPage.country, data.country);
-    cy.typeVisible(RegistrationPage.city, data.city);
-    cy.typeVisible(RegistrationPage.username, data.username);
-    cy.typeVisible(RegistrationPage.password, data.password);
+    RegistrationPage.name().should('be.visible').type(data.name);
+    RegistrationPage.phone().should('be.visible').type(data.phone);
+    RegistrationPage.email().should('be.visible').type(tempEmail);
+    RegistrationPage.country().should('be.visible').select(data.country);
+    RegistrationPage.city().should('be.visible').type(data.city);
+    RegistrationPage.username().should('be.visible').type(data.username);
+    RegistrationPage.password().should('be.visible').type(data.password);
 };
