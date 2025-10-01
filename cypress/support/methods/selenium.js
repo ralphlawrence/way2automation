@@ -44,16 +44,18 @@ export const clickStartButton = (courseName, location) => {
 };
 
 export const selectPayment = (currency) => {
-    cy.fixture('selenium').then((data) => {
-        const prices = data.prices;
-        if (currency === 'USD') {
-            payment.payinUSDBtn().click();
-            payment.price_USD().should('have.text', prices.USD);
-        } else if (currency === 'INR') {
-            payment.payinIndianCurrencyBtn().click();
-            payment.price_IndianCurrency().should('have.text', prices.INR);
-        } else {
-            throw new Error(`Unsupported currency: ${currency}`);
+    cy.fixture('selenium').then(({ prices }) => {
+        switch (currency) {
+            case 'USD':
+                payment.payinUSDBtn().click();
+                payment.price_USD().should('have.text', prices.USD);
+                break;
+            case 'INR':
+                payment.payinIndianCurrencyBtn().click();
+                payment.price_IndianCurrency().should('have.text', prices.INR);
+                break;
+            default:
+                throw new Error(`Unsupported currency: ${currency}`);
         }
     });
 };
@@ -63,7 +65,7 @@ export const clickEnrollButton = () => {
         const { enroll } = data;
 
         payment.enrollBtn().invoke('text').should('include', enroll.beforeClick);
-        cy.clickVisibleElement(payment.enrollBtn);
+        payment.enrollBtn().should('be.visible').click();
         payment.enrollBtn().invoke('text').should('include', enroll.afterClick);
     });
 };
