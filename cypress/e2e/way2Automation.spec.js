@@ -18,27 +18,27 @@ describe('Way2Automation Demo Site Testing', () => {
     });
 
     it('Should extract and list action names by category', () => {
-        const categories = {};
+        // Get all action categories from the landing page
+        actionCategories().then($sections => {
+            const actionMap = {};
 
-        actionCategories().each(($section) => {
-            const categoryName = $section.find('h1').text().trim().toLowerCase();
-
-            const actions = [];
-            cy.wrap($section)
-                .find('ul li a')
-                .each(($action) => {
-                    actions.push($action.text().trim().toLowerCase());
-                })
-                .then(() => {
-                    categories[categoryName] = actions;
-                });
-        })
-            .then(() => {
-                // Save to cypress/fixtures/actionNames.json
-                cy.writeFile('cypress/fixtures/actionNames.json', categories, { flag: 'w' });
-                // Log of categories
-                cy.log(JSON.stringify(categories, null, 2));
+            // Iterate through each section to extract category and actions
+            Cypress._.each($sections, section => {
+                const $section = Cypress.$(section);
+                const category = $section.find('h1').text().trim().toLowerCase();
+                const actions = $section.find('ul li a')
+                    .map((_, el) => Cypress.$(el).text().trim().toLowerCase())
+                    .get();
+                actionMap[category] = actions;
             });
+
+            // Save the extracted categories and actions to a fixture file
+            cy.writeFile('cypress/fixtures/actionNames.json', actionMap, { flag: 'w' });
+
+            // Log the result for debugging
+            cy.log('Extracted action categories:');
+            cy.log(JSON.stringify(actionMap, null, 2));
+        });
     });
 
     it('Should retrieve target URL for [Submit Button Clicked]', () => {
@@ -52,10 +52,9 @@ describe('Way2Automation Demo Site Testing', () => {
 
                 // Visit the target URL
                 cy.visit(targetUrl, () => {
-                    cy.assertBtnVisibility(LifetimeMember.regiForm)
-
-                    // Click the [EXPLORE LIFETIME MEMBERSHIP LINK] event
-                    cy.clickVisibleElement(LifetimeMember.exploreBtn);
+                    // Assert visibility and click the [EXPLORE LIFETIME MEMBERSHIP LINK] event
+                    LifetimeMember.regiForm().should('be.visible');
+                    LifetimeMember.exploreBtn().should('be.visible').click();
                 });
             });
     });
@@ -65,11 +64,11 @@ describe('Lifetime Membership Registration', () => {
     it('Should fill out the registration form by using an email from getnada.com', () => {
         visitGetnada();
 
-        cy.forceClickVisibleBtn(getnada.getInboxBtn);
-        cy.clickVisibleElement(getnada.getChooseForMeBtn);
+        getnada.getInboxBtn().should('be.visible').click({ force: true });
+        getnada.getChooseForMeBtn().should('be.visible').click();
         cy.wait(4000);
 
-        cy.assertBtnVisibility(getnada.getTempEmail);
+        getnada.getTempEmail().should('be.visible');
         getnada.getTempEmail()
             .invoke('text')
             .then((emailText) => {
@@ -78,7 +77,7 @@ describe('Lifetime Membership Registration', () => {
 
                 cy.fixture('registrationTestData').then((data) => {
                     cy.visit('/way2auto_jquery/index.php');
-                    cy.clickVisibleElement(RegistrationPage.regiForm);
+                    RegistrationPage.regiForm().should('be.visible').click();
 
                     fillRegiForm(data, tempEmail);
                 });
@@ -114,11 +113,11 @@ describe('Lifetime Membership Course Flow', () => {
 
         // Verify URL
         cy.fixture('url').then((url) => {
-            cy.verifyUrl(url.seleniumTutorial);
+            cy.url().should('eq', url.seleniumTutorial);
         });
         cy.reload();
     });
-    
+
 });
 
 describe('Automation Architecture Selenium page test flow', () => {
