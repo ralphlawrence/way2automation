@@ -81,7 +81,6 @@ describe('Lifetime Membership Registration', () => {
                 });
             });
     });
-
 });
 
 describe('Lifetime Membership Course Flow', () => {
