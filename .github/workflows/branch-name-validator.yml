@@ -3,7 +3,13 @@ name: Branch Name Validation
 on:
   pull_request:
     branches:
-      - '*'
+      - main
+      - develop
+      - feature/*
+      - hotfix/*
+      - release/*
+      - fix/*
+      - enhancement/*
 
 jobs:
   validate-branch-name:
