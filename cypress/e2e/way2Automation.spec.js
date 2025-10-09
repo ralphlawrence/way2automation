@@ -94,6 +94,7 @@ describe('Lifetime Membership Course Flow', () => {
     });
 
     it('Should display "30+ Courses video library FREE ACCESS"', () => {
+
         cy.get('h2', { timeout: 10000 })
             .contains('30+ Courses video library FREE ACCESS')
             .scrollIntoView()
