@@ -28,12 +28,17 @@ jobs:
             npm install -g eslint
           fi
 
+      - name: Install reviewdog CLI
+        run: |
+          # download latest linux amd64 binary and install to /usr/local/bin
+          curl -sSL https://github.com/reviewdog/reviewdog/releases/latest/download/reviewdog_linux_amd64.zip -o /tmp/reviewdog.zip
+          unzip -q /tmp/reviewdog.zip -d /tmp
+          sudo mv /tmp/reviewdog /usr/local/bin/reviewdog
+          reviewdog -version
+
       - name: Run ESLint and post review comments via reviewdog
-        uses: reviewdog/action-run@v1
-        with:
-          name: eslint
-          command: npx eslint -f unix .
-          reporter: github-pr-review
-          level: warning
+        run: |
+          # run eslint in unix format and pipe to reviewdog
+          npx eslint -f unix . | reviewdog -efm="%f:%l:%c: %m" -name="eslint" -reporter=github-pr-review -level=warning
         env:
           REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
