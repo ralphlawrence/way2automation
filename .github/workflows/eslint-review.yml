@@ -30,10 +30,39 @@ jobs:
 
       - name: Install reviewdog CLI
         run: |
-          # download latest linux amd64 binary and install to /usr/local/bin
-          curl -sSL https://github.com/reviewdog/reviewdog/releases/latest/download/reviewdog_linux_amd64.zip -o /tmp/reviewdog.zip
-          unzip -q /tmp/reviewdog.zip -d /tmp
+          set -euo pipefail
+          URL="https://github.com/reviewdog/reviewdog/releases/latest/download/reviewdog_linux_amd64.zip"
+          OUT=/tmp/reviewdog.zip
+
+          # retry download up to 3 times with backoff
+          for i in 1 2 3; do
+            echo "Downloading reviewdog (attempt $i)..."
+            curl -fL "$URL" -o "$OUT" && break || {
+              echo "reviewdog download failed (attempt $i). Retrying..."
+              sleep $((i * 2))
+            }
+          done
+
+          # sanity checks: file exists and non-empty
+          if [ ! -s "$OUT" ]; then
+            echo "ERROR: reviewdog zip not downloaded or empty"
+            ls -l "$OUT" || true
+            echo "First 400 bytes of downloaded file for debugging:"
+            head -c 400 "$OUT" | sed -n '1,200p' || true
+            exit 1
+          fi
+
+          # verify zip integrity
+          unzip -tq "$OUT" || {
+            echo "ERROR: downloaded file is not a valid zip"
+            file "$OUT" || true
+            exit 1
+          }
+
+          # extract and install
+          unzip -q "$OUT" -d /tmp
           sudo mv /tmp/reviewdog /usr/local/bin/reviewdog
+          sudo chmod +x /usr/local/bin/reviewdog
           reviewdog -version
 
       - name: Run ESLint and post review comments via reviewdog
