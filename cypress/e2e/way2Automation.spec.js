@@ -66,9 +66,7 @@ describe('Lifetime Membership Registration', () => {
 
         getnada.getInboxBtn().should('be.visible').click({ force: true });
         getnada.getChooseForMeBtn().should('be.visible').click();
-        cy.wait(4000);
-
-        getnada.getTempEmail().should('be.visible');
+        getnada.getTempEmail().should('be.visible', {timeout: 4000});
         getnada.getTempEmail()
             .invoke('text')
             .then((emailText) => {
