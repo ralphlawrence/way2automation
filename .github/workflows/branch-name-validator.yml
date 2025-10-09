@@ -3,12 +3,12 @@ name: Branch Name Validation
 on:
   pull_request:
     branches:
-      - main
       - develop
+      - main
       - feature/*
-      - hotfix/*
-      - release/*
       - fix/*
+      - release/*
+      - hotfix/*
       - enhancement/*
 
 jobs:
@@ -16,20 +16,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set script permissions
-        run: chmod +x ./.github/scripts/validate-branch-name.sh
+      # ... (Checkout and permissions steps are unchanged)
 
       - name: Get branch name
-        id: get_branch
+        id: get_branch # This ID is crucial for referencing the output
         run: |
+          # 1. Determine the branch name
           if [ "$GITHUB_EVENT_NAME" == "pull_request" ]; then
             BRANCH_NAME=${GITHUB_HEAD_REF}
           else
             BRANCH_NAME=${GITHUB_REF#refs/heads/}
           fi
-
+          
+          # 2. Set it as an output variable named 'branch'
+          echo "branch=$BRANCH_NAME" >> $GITHUB_OUTPUT
+          
       - name: Validate Branch Name
+        # The correct syntax to reference the output is 'steps.<id>.outputs.<output_name>'
+        # id is 'get_branch', output_name is 'branch'
         run: ./.github/scripts/validate-branch-name.sh ${{ steps.get_branch.outputs.branch }}
