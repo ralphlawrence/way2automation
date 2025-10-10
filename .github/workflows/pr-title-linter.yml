@@ -13,7 +13,7 @@ jobs:
         uses: morrisoncole/pr-lint-action@v1.7.1
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          title-regex: '^(\[(\w+-\d+)\]\s*)+(Add|Remove|Change|Breaking Change|Fix|Release) .+$'
+          title-regex: '^\[[A-Z]+\]\s(Add|Remove|Change|Fix|Release) .+$'
           on-failed-regex-fail-action: true
           on-failed-regex-create-review: true
           on-failed-regex-request-changes: false
