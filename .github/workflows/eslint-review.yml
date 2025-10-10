@@ -61,9 +61,8 @@ jobs:
 
           # extract and install
           unzip -q "$OUT" -d /tmp
-          sudo mv /tmp/reviewdog /usr/local/bin/reviewdog
+          sudo mv /tmp/reviewdog-0.21.0/reviewdog /usr/local/bin/reviewdog
           sudo chmod +x /usr/local/bin/reviewdog
-          reviewdog -version
 
       - name: Run ESLint and post review comments via reviewdog
         run: |
