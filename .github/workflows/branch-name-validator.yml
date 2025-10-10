@@ -10,6 +10,15 @@ on:
       - release/*
       - hotfix/*
       - enhancement/*
+  push:
+    branches:
+      - main
+      - develop
+      - feature/*
+      - release/*
+      - hotfix/*
+      - enhancement/*
+      
 jobs:
   validate-branch-name:
     runs-on: ubuntu-latest
