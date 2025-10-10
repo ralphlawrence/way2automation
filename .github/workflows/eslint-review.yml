@@ -31,7 +31,7 @@ jobs:
       - name: Install reviewdog CLI
         run: |
           set -euo pipefail
-          URL="https://github.com/reviewdog/reviewdog/releases/latest/download/reviewdog_linux_amd64.zip"
+          URL="https://github.com/reviewdog/reviewdog/archive/refs/tags/v0.21.0.zip"
           OUT=/tmp/reviewdog.zip
 
           # retry download up to 3 times with backoff
