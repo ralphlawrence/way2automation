@@ -15,12 +15,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0 
+          fetch-depth: 0
+        
           
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@318e3a1976a364f8e734d34a9f75f64db47da62b # v2.3.0
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} 
+      - uses: SonarSource/sonarcloud-github-action@318e3a1976a364f8e734d34a9f75f64db47da62b
         with:
+          scannerVersion: 6.2.0.4584
           organization: "ralphlawrence_way2automation" 
           projectKey: "ralphlawrence1995-sonarcloud"
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          
